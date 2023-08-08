@@ -6,11 +6,11 @@ const ThreadsTableTestHelper = {
     id = 'thread-1231x',
     title = 'some thread',
     body = 'anything',
-    date = new Date(),
+    date = '2023-08-08T00:00:00.000Z',
     owner = 'user-123x',
   }) {
     const query = {
-      text: 'INSERT INTO threads VALUES($1,$2,$3,$4,%5)',
+      text: 'INSERT INTO threads VALUES($1,$2,$3,$4,$5)',
       values: [id, title, body, date, owner],
     };
 

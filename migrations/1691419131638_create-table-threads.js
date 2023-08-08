@@ -1,5 +1,5 @@
 exports.up = (pgm) => {
-  pgm.createTable(threads, {
+  pgm.createTable('threads', {
     id: {
       type: 'VARCHAR(50)',
       primaryKey: true,
@@ -15,7 +15,6 @@ exports.up = (pgm) => {
     date: {
       type: 'TIMESTAMP',
       notNull: true,
-      default: pgm.func('current_timestamp'),
     },
     owner: {
       type: 'VARCHAR(50)',
