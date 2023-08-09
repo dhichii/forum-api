@@ -71,7 +71,7 @@ describe('ThreadRepositoryPostgres', () => {
     it('should return nothing when thread found', async () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, '');
 
-      await UsersTableTestHelper.addUser({id: 'user-123x'});
+      await UsersTableTestHelper.addUser({});
       await ThreadsTableTestHelper.addThread({id: 'thread-1'});
 
       await expect(threadRepositoryPostgres.verifyAvailableThread('thread-1'))
