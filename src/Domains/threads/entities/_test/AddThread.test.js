@@ -12,6 +12,7 @@ describe('an AddThread entities', () => {
     const payload = {
       title: 213,
       body: 213312,
+      owner: 'asdasd',
     };
 
     expect(() => new AddThread(payload))
@@ -22,11 +23,13 @@ describe('an AddThread entities', () => {
     const payload = {
       title: 'some thread',
       body: 'anything',
+      owner: 'user-123',
     };
 
-    const {title, body} = new AddThread(payload);
+    const {title, body, owner} = new AddThread(payload);
 
     expect(title).toEqual(payload.title);
     expect(body).toEqual(payload.body);
+    expect(owner).toEqual(payload.owner);
   });
 });
