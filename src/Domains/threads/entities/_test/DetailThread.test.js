@@ -28,7 +28,7 @@ describe('a DetailThread entities', () => {
       id: 'thread-x213',
       title: 'some thread',
       body: 'black',
-      date: '2021-08-08T07:19:09.775Z',
+      date: new Date,
       username: 'pGamer',
     };
 

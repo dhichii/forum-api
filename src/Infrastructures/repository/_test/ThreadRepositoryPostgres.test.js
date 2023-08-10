@@ -109,7 +109,7 @@ describe('ThreadRepositoryPostgres', () => {
         id: 'thread-1',
         title: 'some thread',
         body: 'anything',
-        date: currentDate.toISOString(),
+        date: currentDate,
         username: 'dicoding',
       }));
     });
