@@ -16,13 +16,14 @@ exports.up = (pgm) => {
       references: 'users(id)',
       onDelete: 'CASCADE',
     },
-    date: {
-      type: 'TIMESTAMP',
-      notNull: true,
-    },
     content: {
       type: 'TEXT',
       notNull: true,
+    },
+    date: {
+      type: 'TIMESTAMP',
+      notNull: true,
+      default: 'NOW()',
     },
     is_deleted: {
       type: 'BOOLEAN',

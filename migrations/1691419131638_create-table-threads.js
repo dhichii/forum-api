@@ -12,15 +12,16 @@ exports.up = (pgm) => {
       type: 'TEXT',
       notNull: true,
     },
-    date: {
-      type: 'TIMESTAMP',
-      notNull: true,
-    },
     owner: {
       type: 'VARCHAR(50)',
       notNull: true,
       references: 'users(id)',
       onDelete: 'CASCADE',
+    },
+    date: {
+      type: 'TIMESTAMP',
+      notNull: true,
+      default: 'NOW()',
     },
   });
 };
