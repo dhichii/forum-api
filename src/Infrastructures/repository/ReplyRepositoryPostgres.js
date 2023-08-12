@@ -14,12 +14,13 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
   async addReply({content, commentId, owner}) {
     const id = `reply-${this._idGenerator()}`;
+    const currDate = new Date;
     const query = {
       text: `
-        INSERT INTO replies VALUES($1,$2,$3,$4)
+        INSERT INTO replies VALUES($1,$2,$3,$4,$5)
         RETURNING id, content, owner
       `,
-      values: [id, commentId, owner, content],
+      values: [id, commentId, owner, content, currDate],
     };
 
     const {rows} = await this._pool.query(query);
@@ -67,7 +68,7 @@ class ReplyRepositoryPostgres extends ReplyRepository {
         JOIN users AS u ON u.id = r.owner
         JOIN comments AS c ON c.id = r.comment_id
         WHERE c.thread_id=$1
-        ORDER BY c.id, r.date
+        ORDER BY c.date, r.date
       `,
       values: [threadId],
     };
