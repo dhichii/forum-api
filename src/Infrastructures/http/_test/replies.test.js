@@ -4,6 +4,7 @@ const ServerTestHelper = require('../../../../tests/ServerTestHelper');
 const RepliesTableTestHelper = require('../../../../tests/RepliesTableTestHelper');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
+const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
 const container = require('../../container');
 const pool = require('../../database/postgres/pool');
 const createServer = require('../createServer');
@@ -18,6 +19,7 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     await CommentsTableTestHelper.cleanTable();
     await ThreadsTableTestHelper.cleanTable();
     await UsersTableTestHelper.cleanTable();
+    await AuthenticationsTableTestHelper.cleanTable();
   });
 
   describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
