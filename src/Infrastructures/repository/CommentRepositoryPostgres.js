@@ -39,8 +39,6 @@ class CommentRepositoryPostgres extends CommentRepository {
     if (!rowCount) {
       throw new AuthorizationError('anda tidak berhak mengakses resource ini');
     }
-
-    return true;
   }
 
   async deleteCommentById(id) {

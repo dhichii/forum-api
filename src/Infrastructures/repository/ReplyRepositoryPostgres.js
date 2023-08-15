@@ -38,8 +38,6 @@ class ReplyRepositoryPostgres extends ReplyRepository {
     if (!rowCount) {
       throw new AuthorizationError('anda tidak berhak mengakses resource ini');
     }
-
-    return true;
   }
 
   async deleteReplyById(id) {
