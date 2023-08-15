@@ -28,8 +28,10 @@ describe('an AddComment entities', () => {
       owner: 'user-123',
     };
 
-    const addedComment = new AddComment(payload);
+    const {content, threadId, owner} = new AddComment(payload);
 
-    expect(addedComment.content).toEqual(payload.content);
+    expect(content).toEqual(payload.content);
+    expect(threadId).toEqual(payload.threadId);
+    expect(owner).toEqual(payload.owner);
   });
 });
