@@ -37,41 +37,38 @@ describe('GetThreadByIdUseCase', () => {
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    mockThreadRepository.getThreadById = jest.fn()
-        .mockImplementation(() => Promise.resolve(
-            new DetailThread({
-              id: 'thread-123',
-              title: 'some thread',
-              body: 'anything',
-              date: currentDate,
-              username: 'dicoding',
-            }),
-        ));
-    mockCommentRepository.getCommentsByThreadId = jest.fn()
-        .mockImplementation(() => Promise.resolve(
-            [
-              {
-                id: 'comment-123',
-                username: 'dicoding',
-                date: currentDate,
-                content: 'x',
-                is_deleted: false,
-              },
-            ],
-        ));
-    mockReplyRepository.getRepliesByThreadId = jest.fn()
-        .mockImplementation(() => Promise.resolve(
-            [
-              {
-                id: 'reply-123',
-                comment_id: 'comment-123',
-                content: 'some reply',
-                date: currentDate,
-                is_deleted: false,
-                username: 'dicoding',
-              },
-            ],
-        ));
+    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(
+        new DetailThread({
+          id: 'thread-123',
+          title: 'some thread',
+          body: 'anything',
+          date: currentDate,
+          username: 'dicoding',
+        }),
+    ));
+    mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve(
+        [
+          {
+            id: 'comment-123',
+            username: 'dicoding',
+            date: currentDate,
+            content: 'x',
+            is_deleted: false,
+          },
+        ],
+    ));
+    mockReplyRepository.getRepliesByThreadId = jest.fn(() => Promise.resolve(
+        [
+          {
+            id: 'reply-123',
+            comment_id: 'comment-123',
+            content: 'some reply',
+            date: currentDate,
+            is_deleted: false,
+            username: 'dicoding',
+          },
+        ],
+    ));
 
     const getThreadByIdUseCase = new GetThreadByIdUseCase({
       threadRepository: mockThreadRepository,
@@ -128,48 +125,45 @@ describe('GetThreadByIdUseCase', () => {
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    mockThreadRepository.getThreadById = jest.fn()
-        .mockImplementation(() => Promise.resolve(
-            new DetailThread({
-              id: 'thread-123',
-              title: 'some thread',
-              body: 'anything',
-              date: currentDate,
-              username: 'dicoding',
-            }),
-        ));
-    mockCommentRepository.getCommentsByThreadId = jest.fn()
-        .mockImplementation(() => Promise.resolve(
-            [
-              {
-                id: 'comment-123',
-                username: 'dicoding',
-                date: currentDate,
-                content: 'x',
-                is_deleted: false,
-              },
-              {
-                id: 'comment-124',
-                username: 'dicoding',
-                date: currentDate,
-                content: 'x',
-                is_deleted: true,
-              },
-            ],
-        ));
-    mockReplyRepository.getRepliesByThreadId = jest.fn()
-        .mockImplementation(() => Promise.resolve(
-            [
-              {
-                id: 'reply-123',
-                comment_id: 'comment-123',
-                content: 'some reply',
-                date: currentDate,
-                is_deleted: true,
-                username: 'dicoding',
-              },
-            ],
-        ));
+    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(
+        new DetailThread({
+          id: 'thread-123',
+          title: 'some thread',
+          body: 'anything',
+          date: currentDate,
+          username: 'dicoding',
+        }),
+    ));
+    mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve(
+        [
+          {
+            id: 'comment-123',
+            username: 'dicoding',
+            date: currentDate,
+            content: 'x',
+            is_deleted: false,
+          },
+          {
+            id: 'comment-124',
+            username: 'dicoding',
+            date: currentDate,
+            content: 'x',
+            is_deleted: true,
+          },
+        ],
+    ));
+    mockReplyRepository.getRepliesByThreadId = jest.fn(() => Promise.resolve(
+        [
+          {
+            id: 'reply-123',
+            comment_id: 'comment-123',
+            content: 'some reply',
+            date: currentDate,
+            is_deleted: true,
+            username: 'dicoding',
+          },
+        ],
+    ));
 
     const getThreadByIdUseCase = new GetThreadByIdUseCase({
       threadRepository: mockThreadRepository,

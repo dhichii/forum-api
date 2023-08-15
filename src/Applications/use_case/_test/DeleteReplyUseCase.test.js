@@ -14,12 +14,9 @@ describe('DeleteReplyUseCase', () => {
 
     const mockReplyRepository = new ReplyRepository();
 
-    mockReplyRepository.verifyAvailableReply = jest.fn()
-        .mockImplementation(() => Promise.resolve());
-    mockReplyRepository.verifyReplyOwner = jest.fn()
-        .mockImplementation(() => Promise.resolve());
-    mockReplyRepository.deleteReplyById = jest.fn()
-        .mockImplementation(() => Promise.resolve());
+    mockReplyRepository.verifyAvailableReply = jest.fn(() => Promise.resolve());
+    mockReplyRepository.verifyReplyOwner = jest.fn(() => Promise.resolve());
+    mockReplyRepository.deleteReplyById = jest.fn(() => Promise.resolve());
 
     const deleteReplyUseCase = new DeleteReplyUseCase({
       replyRepository: mockReplyRepository,
