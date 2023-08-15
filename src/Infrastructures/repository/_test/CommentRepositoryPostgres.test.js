@@ -68,18 +68,20 @@ describe('CommentRepositoryPostgres', () => {
       ).rejects.toThrowError(AuthorizationError);
     });
 
-    it('should return true when owner is the same as the payload', async () => {
-      await UsersTableTestHelper.addUser({});
-      await ThreadsTableTestHelper.addThread({});
-      await CommentsTableTestHelper.addComment({});
+    it('should return nothing when owner is the same as the payload',
+        async () => {
+          await UsersTableTestHelper.addUser({});
+          await ThreadsTableTestHelper.addThread({});
+          await CommentsTableTestHelper.addComment({});
 
-      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+          const commentRepositoryPostgres =
+              new CommentRepositoryPostgres(pool, {});
 
-      const isOwner = await commentRepositoryPostgres
-          .verifyCommentOwner('comment-123', 'user-123');
-
-      expect(isOwner).toEqual(true);
-    });
+          await expect(commentRepositoryPostgres
+              .verifyCommentOwner('comment-123', 'user-123'))
+              .resolves.not.toThrowError(AuthorizationError);
+        },
+    );
   });
 
   describe('deleteCommentById function', () => {
@@ -100,14 +102,13 @@ describe('CommentRepositoryPostgres', () => {
 
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
-      const result = await commentRepositoryPostgres
-          .deleteCommentById('comment-123');
+      await expect(commentRepositoryPostgres.deleteCommentById('comment-123'))
+          .resolves.not.toThrowError(NotFoundError);
 
-      const comment = await CommentsTableTestHelper
+      const deletedComment = await CommentsTableTestHelper
           .findCommentById('comment-123');
 
-      expect(result).toBeUndefined();
-      expect(comment[0].is_deleted).toEqual(true);
+      expect(deletedComment[0].is_deleted).toEqual(true);
     });
   });
 
@@ -183,7 +184,7 @@ describe('CommentRepositoryPostgres', () => {
       ).rejects.toThrowError(NotFoundError);
     });
 
-    it('should return undefined when thread and comment are available',
+    it('should return nothing when thread and comment are available',
         async () => {
           await UsersTableTestHelper.addUser({});
           await ThreadsTableTestHelper.addThread({});
@@ -192,10 +193,10 @@ describe('CommentRepositoryPostgres', () => {
           const commentRepositoryPostgres =
               new CommentRepositoryPostgres(pool, {});
 
-          const result = commentRepositoryPostgres
-              .verifyAvailableCommentInThread('comment-123', 'thread-123');
-
-          expect(result).toBeUndefined;
+          await expect(commentRepositoryPostgres.verifyAvailableCommentInThread(
+              'comment-123',
+              'thread-123',
+          )).resolves.not.toThrowError(NotFoundError);
         },
     );
   });

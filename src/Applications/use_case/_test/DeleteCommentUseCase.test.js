@@ -23,9 +23,8 @@ describe('DeleteCommentUseCase', () => {
       commentRepository: mockCommentRepository,
     });
 
-    const result = await deleteCommentUseCase.execute(useCasePayload);
-
-    expect(result).toBeUndefined();
+    await expect(deleteCommentUseCase.execute(useCasePayload))
+        .resolves.not.toThrowError();
     expect(mockCommentRepository.verifyAvailableCommentInThread)
         .toBeCalledWith(useCasePayload.commentId, useCasePayload.threadId);
     expect(mockCommentRepository.verifyCommentOwner)

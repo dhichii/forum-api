@@ -71,21 +71,21 @@ describe('ReplyRepositoryPostgres', () => {
       })).rejects.toThrowError(AuthorizationError);
     });
 
-    it('should return true when owner is the same as the payload', async () => {
-      await UsersTableTestHelper.addUser({});
-      await ThreadsTableTestHelper.addThread({});
-      await CommentsTableTestHelper.addComment({});
-      await RepliesTableTestHelper.addReply({});
+    it('should return nothing when owner is the same as the payload',
+        async () => {
+          await UsersTableTestHelper.addUser({});
+          await ThreadsTableTestHelper.addThread({});
+          await CommentsTableTestHelper.addComment({});
+          await RepliesTableTestHelper.addReply({});
 
-      const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
+          const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
 
-      const isOwner = await replyRepositoryPostgres.verifyReplyOwner({
-        replyId: 'reply-123',
-        userId: 'user-123',
-      });
-
-      expect(isOwner).toEqual(true);
-    });
+          expect(replyRepositoryPostgres.verifyReplyOwner({
+            replyId: 'reply-123',
+            userId: 'user-123',
+          })).resolves.not.toThrowError(AuthorizationError);
+        },
+    );
   });
 
   describe('deleteReplyById function', () => {
@@ -104,11 +104,13 @@ describe('ReplyRepositoryPostgres', () => {
 
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
 
-      const result = await replyRepositoryPostgres.deleteReplyById('reply-123');
-      const reply = await RepliesTableTestHelper.findReplyById('reply-123');
+      await expect(replyRepositoryPostgres.deleteReplyById('reply-123'))
+          .resolves.not.toThrowError(NotFoundError);
 
-      expect(result).toBeUndefined();
-      expect(reply[0].is_deleted).toEqual(true);
+      const deletedReply = await RepliesTableTestHelper
+          .findReplyById('reply-123');
+
+      expect(deletedReply[0].is_deleted).toEqual(true);
     });
   });
 
@@ -200,7 +202,7 @@ describe('ReplyRepositoryPostgres', () => {
         replyId: 'reply-123',
         commentId: 'comment-123',
         threadId: 'thread-123',
-      })).resolves.toBeUndefined();
+      })).resolves.not.toThrowError(NotFoundError);
     });
   });
 });

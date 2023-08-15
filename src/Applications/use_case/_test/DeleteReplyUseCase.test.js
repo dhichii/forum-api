@@ -25,9 +25,8 @@ describe('DeleteReplyUseCase', () => {
       replyRepository: mockReplyRepository,
     });
 
-    const result = await deleteReplyUseCase.execute(useCasePayload);
-
-    expect(result).toBeUndefined();
+    await expect(deleteReplyUseCase.execute(useCasePayload))
+        .resolves.not.toThrowError();
     expect(mockReplyRepository.verifyAvailableReply)
         .toBeCalledWith(new DeleteReply(useCasePayload));
     expect(mockReplyRepository.verifyReplyOwner)

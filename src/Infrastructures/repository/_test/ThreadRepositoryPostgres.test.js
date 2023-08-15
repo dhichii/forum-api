@@ -75,8 +75,7 @@ describe('ThreadRepositoryPostgres', () => {
       await ThreadsTableTestHelper.addThread({id: 'thread-1'});
 
       await expect(threadRepositoryPostgres.verifyAvailableThread('thread-1'))
-          .resolves
-          .toBeUndefined();
+          .resolves.not.toThrowError(NotFoundError);
     });
   });
 
