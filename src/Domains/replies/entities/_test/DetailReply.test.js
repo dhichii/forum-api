@@ -1,6 +1,6 @@
 const DetailReply = require('../DetailReply');
 
-describe('an DetailReply entities', () => {
+describe('a DetailReply entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     const payload = {};
 
