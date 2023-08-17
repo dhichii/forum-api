@@ -10,7 +10,7 @@ describe('a DetailCommentLike entities', () => {
 
   it('should throw error when payload did not meet data type spec', () => {
     const payload = {
-      like: 'x',
+      likes: 'x',
     };
 
     expect(() => new DetailCommentLike(payload))
@@ -19,11 +19,11 @@ describe('a DetailCommentLike entities', () => {
 
   it('should throw error when payload did not meet data type spec', () => {
     const payload = {
-      like: 0,
+      likes: 0,
     };
 
-    const {like} = new DetailCommentLike(payload);
+    const {likes} = new DetailCommentLike(payload);
 
-    expect(like).toEqual(payload.like);
+    expect(likes).toEqual(payload.likes);
   });
 });
