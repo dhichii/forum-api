@@ -20,7 +20,7 @@ const UserCommentLikesTableTestHelper = {
       values: [id],
     };
 
-    const {rows} = pool.query(query);
+    const {rows} = await pool.query(query);
     return rows;
   },
   async cleanTable() {
