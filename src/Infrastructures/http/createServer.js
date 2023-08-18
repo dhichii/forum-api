@@ -16,6 +16,14 @@ const createServer = async (container) => {
     port: process.env.PORT,
   });
 
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: () => ({
+      message: 'Welcome to Forum API',
+    }),
+  });
+
   await server.register([
     {
       plugin: Jwt,
